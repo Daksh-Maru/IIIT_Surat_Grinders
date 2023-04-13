@@ -1,2 +1,2 @@
 # HELLO VISITORS
-This is a repo consisting of projects and codes which are given as assignments.
+This is a repo consisting of projects given by IIIT Surat.
