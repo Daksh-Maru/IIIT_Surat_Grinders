@@ -8,11 +8,12 @@ struct node{
 struct node* start=NULL;
 main(){
 	//declarations
-	int ch,c=1;
+	int ch;
 	struct node* newnode;
 	int num;
 	struct node* t1;
 	struct node* t2;
+	int ind=0;
 	//
 	do{
 		printf("MENU:\n");
@@ -20,14 +21,13 @@ main(){
 		printf("2. display list\n");
 		printf("3. enter element at beginning\n");
 		printf("4. enter element at end\n");
-		printf("5. enter element after a node\n");
+		printf("5. enter element after a node at index\n");
 		printf("6. delete first element\n");
 		printf("7. delete last element\n");
-		printf("8. delete element after a node\n");
+		printf("8. delete element after a node at index\n");
 		printf("9. exit\n");
 		printf("\nenter choice:");
 		scanf("%d", &ch);
-		
 		switch(ch){
 			case 1:
 				printf("Enter -1 to end filling data\n");
@@ -84,27 +84,24 @@ main(){
 				newnode->prev=t1;
 				break;
 			case 5:
+				ind=0;
+				printf("Enter Index after which node is to be inserted:");
+				scanf("%d",&num);
 				t1=start;
 				if (t1==NULL){
 					printf("INDEX OUT OF RANGE\n"); 
 					break;
 				} 
-				newnode=(struct node*)malloc(sizeof(struct node));
-				printf("Enter data:");
-				scanf("%d",&newnode->val);
-				printf("Enter the value after which data to be inserted:");
-				scanf("%d",&num);
 				while (t1!=NULL){
-					if (t1->val==num){
-						c=0;
+					ind++;
+					if (ind==num){
 						break;
 					}
 					t1=t1->next;
 				}
-				if (c!=0){
-					printf("NO SUCH VALUE FOUND IN LINKED LIST\n");
-					break;
-				}
+				newnode=(struct node*)malloc(sizeof(struct node));
+				printf("Enter data:");
+				scanf("%d",&newnode->val);
 				newnode->prev=t1;
 				newnode->next=t1->next;
 				t1->next=newnode;
@@ -133,28 +130,23 @@ main(){
 				t1->next=NULL;
 				break;
 			case 8:
+				ind=0;
+				printf("Enter Index after which node is to be deleted:");
+				scanf("%d",&num);
 				t1=start;
 				if (t1==NULL){
 					printf("INDEX OUT OF RANGE\n");
 					break;
 				}
-				printf("Enter value after which node is to be deleted:");
-				scanf("%d",&num);
 				while(t1!=NULL){
-					if (t1->val==num){
-						c=0;
+					ind++;
+					if (ind==num){
 						break;
 					}
 					t1=t1->next;
 				}
-				if (c==0){
-					if (t1->next==NULL){
+				if (t1->next==NULL){
 					printf("NOTHING THERE TO DELETE\n");
-					break;
-					}
-				}
-				else{
-					printf("NO SUCH VALUE FOUND IN LINKED LIST\n");
 					break;
 				}
 				t2=t1->next;
